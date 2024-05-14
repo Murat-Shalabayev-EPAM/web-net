@@ -1,3 +1,9 @@
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using Northwind.Config;
+using NorthWind.Data;
+using static System.Net.Mime.MediaTypeNames;
+
 namespace Northwind
 {
     public class Program
@@ -8,6 +14,11 @@ namespace Northwind
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+            builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
             var app = builder.Build();
 
@@ -21,6 +32,7 @@ namespace Northwind
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseStatusCodePages(Text.Plain, "Status Code Page: {0}");
 
             app.UseRouting();
 
