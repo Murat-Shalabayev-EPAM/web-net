@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Config;
+using Northwind.Interfaces;
+using Northwind.Repository;
 using NorthWind.Data;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -19,6 +21,8 @@ namespace Northwind
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
             var app = builder.Build();
 

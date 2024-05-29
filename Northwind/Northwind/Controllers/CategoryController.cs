@@ -1,21 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NorthWind.Data;
+using Northwind.Interfaces;
 
 namespace NorthWind.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICategoryRepository _repository;
 
-        public CategoryController(ApplicationDbContext context)
+        public CategoryController(ICategoryRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public async Task<ActionResult> Index()
         {
-            var categories = await _context.Categories.ToListAsync();
+            var categories = await _repository.GetAll();
             return View(categories);
         }
     }
