@@ -25,5 +25,10 @@ namespace Northwind.Repository
 
             return await categories.ToListAsync();
         }
+
+        public async Task<byte[]> ReturnImage(int id)
+        {
+            return await _context.Categories.Where(x => x.CategoryID == id).Select(x => x.Picture).FirstOrDefaultAsync();
+        }
     }
 }

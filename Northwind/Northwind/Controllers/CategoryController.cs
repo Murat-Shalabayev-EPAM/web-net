@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Northwind.Interfaces;
 
 namespace NorthWind.Controllers
@@ -17,6 +16,13 @@ namespace NorthWind.Controllers
         {
             var categories = await _repository.GetAll();
             return View(categories);
+        }
+
+        [Route("/images/{id}")]
+        public async Task<ActionResult> GetImage(int id)
+        {
+            var imageData = await _repository.ReturnImage(id);
+            return File(imageData, "image/octet-stream");
         }
     }
 }
