@@ -21,8 +21,8 @@ namespace Northwind.Tests
         [Fact]
         public void Return_Category_ViewModels()
         {
-            var clubs = A.Fake<IEnumerable<CategoryViewModel>>();
-            A.CallTo(() => _repository.GetAll()).Returns(clubs);
+            var categories = A.Fake<IEnumerable<CategoryViewModel>>();
+            A.CallTo(() => _repository.GetAll()).Returns(categories);
 
             var result = _controller.Index();
             result.Should().BeOfType<Task<ActionResult>>();

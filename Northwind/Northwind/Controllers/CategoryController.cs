@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Northwind.Interfaces;
+using System.Text;
 
 namespace NorthWind.Controllers
 {
@@ -18,7 +19,7 @@ namespace NorthWind.Controllers
             return View(categories);
         }
 
-        [Route("/images/{id}")]
+        [Route("/images/{id}")] 
         public async Task<ActionResult> GetImage(int id)
         {
             var imageData = await _repository.ReturnImage(id);

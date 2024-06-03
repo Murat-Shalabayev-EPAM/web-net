@@ -12,16 +12,14 @@ namespace NorthWind.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly IProductRepository _productRepository;
 
-        public ProductController(ApplicationDbContext context, IProductRepository productRepository)
+        public ProductController(IProductRepository productRepository)
         {
-            _context = context;
             _productRepository = productRepository;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<ActionResult> Index()
         {
             var products = await _productRepository.GetAll();
             return View(products);
@@ -41,7 +39,6 @@ namespace NorthWind.Controllers
             if (ModelState.IsValid)
             {
                 await _productRepository.Upsert(model);
-                await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
