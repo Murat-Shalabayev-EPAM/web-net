@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿
 namespace Northwind.Models.ViewModels
 {
     public class CategoryViewModel
@@ -7,5 +6,6 @@ namespace Northwind.Models.ViewModels
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
         public string Description { get; set; }
+        public byte[] Picture { get; set; }
     }
 }
