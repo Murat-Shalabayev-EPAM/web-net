@@ -2,7 +2,6 @@
 using Northwind.Interfaces;
 using Northwind.Models.ViewModels;
 using NorthWind.Data;
-using NorthWind.Models;
 
 namespace Northwind.Repository
 {
